@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int partition(int arr[],int str,int end){
+    int idx=str-1,pivot=arr[end];
+    for(int j=str;j<end;j++){
+        if(arr[j]<=pivot){
+            idx++;
+            swap(arr[idx],arr[j]);
+        }
+    }
+    idx++;
+    swap(arr[end],arr[idx]);
+    return idx;
+}
+void quicksort(int arr[],int str,int end){
+    if(str<end){
+        int pivindex=partition(arr,str,end);
+        quicksort(arr,str,pivindex-1);
+        quicksort(arr,pivindex+1,end);
+    }
+}
+
+int main(){
+    int arr[]={5,2,6,4,1,3};
+    quicksort(arr,0,sizeof(arr)/sizeof(arr[0]) -1);
+    for(int i=0;i<sizeof(arr)/sizeof(arr[0]);i++){
+        cout<<arr[i]<<" ";
+    }
+}
